@@ -44,12 +44,12 @@
       "dockerBuild": {
         "tag": "simulator:dev",
         "target": "base",
-        "dockerfile": "${workspaceFolder}/Server/Dockerfile",
+        "dockerfile": "${workspaceFolder}/Client/Dockerfile",
         "context": "${workspaceFolder}",
         "pull": true
       },
       "netCore": {
-        "appProject": "${workspaceFolder}/Server/Server.csproj"
+        "appProject": "${workspaceFolder}/Client/Client.csproj"
       }
     },
     {
@@ -58,13 +58,13 @@
       "dependsOn": ["build"],
       "dockerBuild": {
         "tag": "simulator:latest",
-        "dockerfile": "${workspaceFolder}/Server/Dockerfile",
+        "dockerfile": "${workspaceFolder}/Client/Dockerfile",
         "context": "${workspaceFolder}",
         "platform": "linux/amd64",
         "pull": true
       },
       "netCore": {
-        "appProject": "${workspaceFolder}/Server/Server.csproj"
+        "appProject": "${workspaceFolder}/Client/Client.csproj"
       }
     },
     {
@@ -73,7 +73,7 @@
       "dependsOn": ["docker-build: debug"],
       "dockerRun": {},
       "netCore": {
-        "appProject": "${workspaceFolder}/Server/Server.csproj",
+        "appProject": "${workspaceFolder}/Client/Client.csproj",
         "enableDebugging": true
       }
     },
@@ -83,7 +83,7 @@
       "dependsOn": ["docker-build: release"],
       "dockerRun": {},
       "netCore": {
-        "appProject": "${workspaceFolder}/Server/Server.csproj"
+        "appProject": "${workspaceFolder}/Client/Client.csproj"
       }
     }
   ]

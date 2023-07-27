@@ -13,8 +13,20 @@ namespace Server.Controllers
         [HttpGet]
         public IActionResult SimulatePrematureResponse()
         {
-            // Simulate premature response by not awaiting an asynchronous operation
-            return Ok("Premature response");
+            string filePath = @"MOCK_DATA.json";
+            try
+            {
+                // Read the JSON data from the file
+                string jsonData = System.IO.File.ReadAllText(filePath);
+
+                // Return the JSON data as the response
+                return Content(jsonData, "application/json");
+            }
+            catch (IOException ex)
+            {
+                // Handle the exception if the file read fails
+                return StatusCode(500, $"Error reading JSON file: {ex.Message}");
+            }
         }
     }
 }

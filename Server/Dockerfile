@@ -12,6 +12,7 @@ USER appuser
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Server/Server.csproj", "Server/"]
+COPY ["Server/MOCK_DATA.json", "Server/"]
 RUN dotnet restore "Server/Server.csproj"
 COPY . .
 WORKDIR "/src/Server"

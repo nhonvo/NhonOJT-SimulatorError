@@ -4,29 +4,37 @@ namespace Client.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class WeatherController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+    private readonly HttpClient _httpClient;
 
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherController()
     {
-        _logger = logger;
+        _httpClient = new HttpClient();
+        // You can configure the base address of the external API here
+        _httpClient.BaseAddress = new Uri("http://localhost:5225/");
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet]
+    [Route("api/weather")]
+    public async Task<IActionResult> GetWeatherData()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        try
         {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+            // Call the external API and get the response
+            HttpResponseMessage response = await _httpClient.GetAsync("WeatherForecast");
+            response.EnsureSuccessStatusCode();
+
+            // Read the JSON data from the response
+            string jsonData = await response.Content.ReadAsStringAsync();
+
+            // Return the JSON data as the response
+            return Content(jsonData, "application/json");
+        }
+        catch (HttpRequestException ex)
+        {
+            // Handle the exception if there is an issue with the external API
+            return StatusCode(500, $"Error calling external API: {ex.Message}");
+        }
     }
 }

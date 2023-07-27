@@ -3,13 +3,13 @@
 version: '3.4'
 
 services:
-  server:
-    image: server
+  client:
+    image: client
     build:
       context: .
-      dockerfile: Server/Dockerfile
+      dockerfile: Client/Dockerfile
     ports:
-      - 5225:5225
+      - 5196:5196
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
