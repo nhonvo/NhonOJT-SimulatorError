@@ -13,7 +13,7 @@ namespace Server.Controllers
         [HttpGet]
         public IActionResult SimulatePrematureResponse()
         {
-            string filePath = @"MOCK_DATA.json";
+            string filePath = @"C:\Users\Truong Nhon\Desktop\simulator\Server\MOCK_DATA.json";
             try
             {
                 // Read the JSON data from the file
