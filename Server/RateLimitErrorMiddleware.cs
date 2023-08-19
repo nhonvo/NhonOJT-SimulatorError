@@ -3,9 +3,6 @@ using System.Threading.RateLimiting;
 
 namespace Server
 {
-
-
-
     public class RateLimitMiddleware
     {
         private readonly RequestDelegate _next;

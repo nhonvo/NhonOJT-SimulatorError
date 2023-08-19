@@ -1,4 +1,16 @@
 # Try to find down error "The response ended prematurely"
+
+## Technical
+
+- cors
+- http client
+- docker
+- task asynchronous
+- rate limit
+- Big data > 1.000.000 records
+
+## Documentation
+
 The error message "The response ended prematurely" is a specific type of HttpRequestException that can occur when using HttpClient to send HTTP requests in C#. This error indicates that the server closed the connection before sending a complete response.
 
 There are several situations when you can encounter this error:
